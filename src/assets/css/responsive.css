@@ -11,7 +11,7 @@
   {
     display: none;
   }
-  
+
   .user-main-dashboard main .main-box .table-responsive {
     overflow: auto;
   }
@@ -174,10 +174,10 @@
 #usermessage #mycontainer main{
     flex: 100%;
     width: 100%;
-    max-width: 100%; 
+    max-width: 100%;
     height: 400px;
     overflow: auto;
-} 
+}
 #usernotification .single-notification{
   display: block;
 }
@@ -483,7 +483,7 @@
   }
 
   .marquee-content {
-    width: 400%;
+    width: 528%;
   }
   .marquee-item {
     padding: 20px 20px;
@@ -696,7 +696,7 @@
     margin-left: 0px;
     margin-right: 0px;
   }
-  
+
 }
 
 
@@ -775,7 +775,7 @@
     -moz-text-stroke: 2px #fb3ab4;
     margin-bottom: 25px;
   }
-  
+
 
 }
 

@@ -1043,7 +1043,7 @@ select:focus {
 }
 
 .marquee-content {
-  width: 200%;
+  width: 264%;
   display: flex;
 }
 
@@ -1072,7 +1072,7 @@ select:focus {
 
 .bnp-logo {
   width: 230px;
-  max-height: 70px;
+  max-height: 90px;
 }
 
 @keyframes marquee {
@@ -1101,7 +1101,7 @@ select:focus {
   bottom: -120px;
   z-index: 1;
   overflow: hidden;
-  
+
 }
 .subscribe-box .left {
   position: absolute;
