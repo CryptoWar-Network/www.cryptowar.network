@@ -34,6 +34,7 @@ export default {
                 <img  loading="lazy" v-lazysizes :data-src="'../assets/images/text.webp'" alt="">
               </h1>
               <div class="links">
+                <p><router-link to="/airdrop" class="mybtn1" target="_blank" rel="noopener noreferrer">Get AirDrop</router-link> </p>
                 <p><a href="https://bond.cryptowar.network/#/" class="mybtn1" target="_blank" rel="noopener noreferrer">Buy XBLADE</a> </p>
                 <a href="https://play.cryptowar.network/#/" class="mybtn1" target="_blank" rel="noopener noreferrer">Play Now</a>
                 </div>

@@ -485,12 +485,6 @@
   .marquee-content {
     width: 528%;
   }
-  .marquee-item {
-    padding: 20px 20px;
-    margin: 0 10px;
-    box-sizing: content-box;
-    min-width: 151px;
-  }
 }
 
 @media (min-width: 991px) {
@@ -696,7 +690,17 @@
     margin-left: 0px;
     margin-right: 0px;
   }
+  .marquee-item {
+    padding: 20px 20px;
+    margin: 0 10px;
+    box-sizing: content-box;
+    width: 151px;
+  }
 
+  .bnp-logo.owl {
+    min-width: 152px;
+    min-height: 51px;
+  }
 }
 
 
