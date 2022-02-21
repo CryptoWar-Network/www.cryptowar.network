@@ -268,7 +268,7 @@
                         href="https://wiki.cryptowar.network/tokenomics"
                         >xBlade Tokenomics</a
                       >, Join
-                      <a target="_blank" href="https://t.me/elasticbitcoinxbt"
+                      <a target="_blank" href="https://t.me/cryptowarxblade"
                         >Telegram</a
                       >,
                       <a target="_blank" href="https://discord.gg/zS2khZ4F7K"
