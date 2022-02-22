@@ -27,7 +27,7 @@
                     </a>
                   </li>
                   <li>
-                    <a href="https://t.me/cryptowarxbladet" target="_blank" rel="noopener noreferrer">
+                    <a href="https://t.me/cryptowarxblade" target="_blank" rel="noopener noreferrer">
                       <i class="fab fa-telegram"></i>
                     </a>
                   </li>
