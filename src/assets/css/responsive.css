@@ -701,6 +701,10 @@
     min-width: 152px;
     min-height: 51px;
   }
+
+  .footer .social-links ul li {
+    margin-top: 5px;
+  }
 }
 
 

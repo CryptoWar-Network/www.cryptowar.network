@@ -145,6 +145,11 @@
                 </a>
               </li>
               <li>
+                <a href="https://medium.com/cryptowar-metaverse" target="_blank" rel="noopener noreferrer">
+                  <img loading="lazy"  src="https://i.imgur.com/bymeWZW.png" width="24px">
+                </a>
+              </li>
+              <li>
                 <a href="https://bscscan.com/token/0x27a339d9b59b21390d7209b78a839868e319301b" target="_blank" rel="noopener noreferrer">
                   <img loading="lazy"  src="https://i.imgur.com/6LX1f1i.png" width="24px">
                 </a>
@@ -157,6 +162,11 @@
               <li>
                 <a href="https://www.coingecko.com/en/coins/cryptowar-xblade" target="_blank" rel="noopener noreferrer">
                   <img loading="lazy"  src="https://i.imgur.com/E0sUP9D.png" width="24px">
+                </a>
+              </li>
+              <li>
+                <a href="https://cryptowar.substack.com/" target="_blank" rel="noopener noreferrer">
+                  <img loading="lazy"  src="https://i.imgur.com/V5uYHsX.png" width="24px">
                 </a>
               </li>
               <!-- <li>
