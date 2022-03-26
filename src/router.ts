@@ -41,6 +41,11 @@ const routes = [
     path: '/buy',
     name: 'buy-xblade',
     component: () => import("./pages/FairDistribution.vue")
+  },
+  {
+    path: '/xdrop',
+    name: 'xdrop',
+    component: () => import("./pages/Xdrop.vue")
   }
 ];
 const router = createRouter({ history, routes });

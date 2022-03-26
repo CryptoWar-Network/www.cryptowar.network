@@ -17,12 +17,22 @@
           @click="
             handlePurchase('0x27a339d9b59b21390d7209b78a839868e319301b', 0)
           "
+          v-if="!this.isXdrop"
         >
           Get Random xBlade
         </c-button>
-        <h4>Or choose your options</h4>
+        <c-button
+          class="mybtn1"
+          @click="
+            handlePurchase('0x27a339d9b59b21390d7209b78a839868e319301b', 0)
+          "
+          v-else
+        >
+          Claim your xBlade
+        </c-button>
+        <h4 v-if="!this.isXdrop">Or choose your options</h4>
       </div>
-      <div class="mt-32">
+      <div class="mt-32" v-if="!this.isXdrop">
         <table class="table">
           <thead>
             <tr>
@@ -92,7 +102,7 @@
         </table>
       </div>
 
-      <div style="margin-top: 0px">
+      <div style="margin-top: 0px" v-if="!this.isXdrop">
         <!-- <hr/> -->
         <h5>💕 Get free xBlade 💕</h5>
         Get Free xBlade by refering to your friends to claim airdrop using
@@ -156,6 +166,10 @@ export default {
       type: Number,
       default: 0,
     },
+    isXdrop: {
+      type: Boolean,
+      default: false
+    }
   },
   computed: {
     availableToClaim() {

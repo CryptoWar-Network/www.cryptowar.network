@@ -12,11 +12,11 @@
                 bottomDivider && 'has-bottom-divider',
               ]"
             >
-              <c-section-header
+              <!-- <c-section-header
                 tag="h1"
                 :data="sectionHeader"
                 class="center-content"
-              />
+              /> -->
               <div style="text-align: center">
                 <b
                   >To get xBlade, please retweet this
@@ -59,6 +59,7 @@
                       :max-bid-amount="maxBidAmount"
                       :user-account="userAccount"
                       :xbn-amounts="xbladeAmounts"
+                      :is-xdrop="true"
                     />
                   </div>
                 </div>
@@ -103,54 +104,85 @@
   ></section>
   <!-- Help Section Start -->
   <transition name="modal">
-    <modal v-if="showModal" @close="closeModal()">
-      <template v-slot:header>Transaction submitted</template>
-      <template v-slot:body>
-        <div class="success">Thank you</div>
-        <div class="mt-32">
-          <vue-goodshare-facebook
-            :quote="pageTitle"
-            :page_title="pageTitle"
-            :page_url="pageUrl"
-            has_icon
-            has_counter
-            title_social="Facebook"
-          />
-          <vue-goodshare-twitter
-            :page_title="pageTitle"
-            :page_url="pageUrl"
-            has_icon
-            title_social="Twitter"
-          />
+    <custom-modal v-if="showModal" @close="closeModal()">
+      <template v-slot:header>
+        <div v-if="this.isClaiming">
+          <div v-on:click="closeModal()" class="buttonCloseClaiming">X</div>
+        </div>
+        <div v-else class="rowItem">
+          <div>Claim XBlade</div>
+          <div v-on:click="closeModal()" class="buttonClose">X</div>
         </div>
       </template>
-    </modal>
+      <template v-slot:body>
+        <div class="centerLoading" v-if="this.isClaiming">
+          <img class="successImage" v-if="this.claimSuccess" src="../assets/images/Congrats.gif" alt="">
+          <img class="gifImage" v-else src="../assets/images/loadingCircle.gif" alt="">
+        </div>
+        <div v-else>
+          <h3>{{convertHexToDecimal(this.xdropData.amount)}} Xblade</h3>
+        <div class="mt-32">
+            <div class="rowItem">
+                <div>User</div>
+                <div>{{renderOwner(this.userAccount)}}</div>
+            </div>
+        </div>
+        </div>
+      </template>
+      <template v-slot:footer>
+        <div v-if="this.isClaiming && !this.claimSuccess">
+          Claiming {{convertHexToDecimal(this.xdropData.amount)}} Xblade
+        </div>
+        <div v-if="this.claimSuccess">
+          Claimed {{convertHexToDecimal(this.xdropData.amount)}} Xblade
+        </div>
+          <div v-if="!this.isClaiming && !this.claimSuccess" class="bodyBelow">
+            <div>Thank for being a long time supporter of Cryptowar Xblade! You may claim XBLADE to be used for mint heros or buy weapons in <a href="https://play.cryptowar.network" target="_blank">Cryptowar Xblade</a>!</div>
+        </div>
+        <button v-if="!this.isClaiming && !this.claimSuccess" class="claimButton" @click="claimToken()">
+              Claim Xblade
+            </button>
+      </template>
+    </custom-modal>
+  </transition>
+  <transition>
+    <custom-modal v-if="this.errorClaim.length >0 " @close="closeModalError()">
+      <template v-slot:header>
+        <div class="rowItem">
+          <div>Claim XBlade</div>
+          <div v-on:click="closeModalError()" class="buttonClose">X</div>
+        </div>
+      </template>
+      <template v-slot:body>
+        <div class="errorTextBlock">
+          <span>Error: View transaction at:
+            <a :href="this.errorClaim">{{this.errorClaim}}</a></span></div>
+      </template>
+    </custom-modal>
   </transition>
 </template>
 <script>
 import _ from "lodash";
-import CSectionHeader from "@/components/SectionHeader.vue";
-import VueGoodshareFacebook from "vue-goodshare/src/providers/Facebook.vue";
-import VueGoodshareTwitter from "vue-goodshare/src/providers/Twitter.vue";
+// import CSectionHeader from "@/components/SectionHeader.vue";
 import SaleInputAirdrop from "@/components/SaleInputAirdrop";
 import WalletNotConnect from "@/components/WalletNotConnect";
 import { getWeb3Client } from "@/libs/web3";
-import { claimAirdrop } from "@/libs/xdrop";
+import { claimAirdrop } from "@/libs/merkleAirdrop.js";
 import { SectionProps } from "@/utils/SectionProps.js";
 import emitter from "tiny-emitter/instance";
 import { ref, onMounted } from "vue";
-import modal from "@/components/elements/Modal.vue";
+import CustomModal from "@/components/elements/CustomModal.vue";
 // import Swal from "sweetalert2";
+import data from '../libs/allocation_merkle_output.json';
+import Bignumber from 'bignumber.js'
 
 export default {
-  name: "AirDrop",
+  name: "Xdrop",
   components: {
     WalletNotConnect,
-    CSectionHeader,
-    VueGoodshareFacebook,
-    VueGoodshareTwitter,
+    // CSectionHeader,
     SaleInputAirdrop,
-    modal,
+    CustomModal,
   },
   setup() {
     const success = ref(null);
@@ -190,6 +222,10 @@ export default {
       walletClient: {},
       showModal: false,
       xbladeAmounts: [20,50,100],
+      xdropData: null,
+      errorClaim: "",
+      isClaiming: false,
+      claimSuccess: false
     };
   },
   mixins: [SectionProps],
@@ -226,6 +262,14 @@ export default {
     closeModal() {
       this.showModal = false;
     },
+    closeModalError() {
+      this.errorClaim = "";
+    },
+    renderOwner(owner) {
+      const hiddenString = owner.slice(5, owner?.length - 5)
+        const hiddenOwner = owner.split(hiddenString).join('...')
+        return hiddenOwner
+    },
     async handleGetClient() {
       const walletClient = await getWeb3Client();
       this.walletClient = walletClient;
@@ -245,63 +289,44 @@ export default {
         await this.handleGetInitialData();
       }
     },
-    async getSaleInfo() {
-      // const walletClient = this.walletClient;
-
-      // const XBNAmount1 = await getReturnAmount(
-      //   walletClient.web3Client,
-      //   "0x27a339d9b59b21390d7209b78a839868e319301b",
-      //   0.002
-      // );
-      // // console.log(`XBN1 ${XBNAmount1}`)
-      // const XBNAmount2 = await getReturnAmount(
-      //   walletClient.web3Client,
-      //   "0x27a339d9b59b21390d7209b78a839868e319301b",
-      //   0.007
-      // );
-      // const XBNAmount3 = await getReturnAmount(
-      //   walletClient.web3Client,
-      //   "0x27a339d9b59b21390d7209b78a839868e319301b",
-      //   0.011
-      // );
-
-      // // console.info(XBNAmount1,XBNAmount2,XBNAmount3);
-      // this.xbladeAmounts[0]= XBNAmount1;
-      // this.xbladeAmounts[1]= XBNAmount2;
-      // this.xbladeAmounts[2]= XBNAmount3;
-      // console.log(`xbladeAmounts ${this.xbladeAmounts}`);
+    async claimToken() {
+      try {
+        const walletClient = this.walletClient;
+        const amountHex = this.xdropData.amount;
+        const bigNumber = new Bignumber(amountHex, 16);
+        const amountDecimal = bigNumber.toString(10);
+        this.isClaiming= true;
+        await claimAirdrop(walletClient.web3Client, this.userAccount, amountDecimal);
+        this.isClaiming=false;
+        this.claimSuccess= true;
+        this.errorClaim=""
+        // if(result) {
+        //   console.log('result ne', result)
+        //   this.errorClaim=""
+        //   this.claimSuccess=true;
+        // }
+      }catch(error) {
+        this.showModal = false;
+        setTimeout(() => {
+          if(error?.code === 4001) {
+            this.errorClaim = error.message;
+            return ;
+          }
+          this.errorClaim = `https://testnet.bscscan.com/tx/${error?.receipt?.transactionHash}`
+        }, 200);
+      }
     },
 
-    async fetchStatus() {
-      // const walletClient = this.walletClient;
-
-      this.getSaleInfo();
-      // const v = this;
-      // // this.getOrderBook();
-      // setInterval(function() {
-      //   v.fetchStatus();
-      // }, 5000);
-
-      // // Get balance
-      // const xbtBalance = await getXBNBalance(walletClient.web3Client);
-      // this.$set(this, 'xbtBalance', xbtBalance);
+    convertHexToDecimal(hexString) {
+        const decimal = parseInt(hexString, 16);
+        return decimal * Math.pow(10, -18);
     },
 
-    async exchangeToken(address, amount) {
-      const walletClient = this.walletClient;
-      let reseller = this.$route.query.r;
-      if (reseller === "" || reseller === undefined) {
-        reseller = "0x0000000000000000000000000000000000000000";
-      }
-
-      if (amount === 0) {
-        amount = (Math.floor(Math.random() * Math.floor(12)) + 3) / 1000;
-      }
-      // console.log(`reseller ${reseller}`)
-
-      await claimAirdrop(walletClient.web3Client, address, amount, reseller);
-      this.showModal = true;
-      await this.fetchStatus();
+    async exchangeToken() {
+        this.showModal = true;
+        const accounts = await this.walletClient.web3Client.eth.getAccounts();
+        this.userAccount = accounts.length > 0 ? accounts[0] : null;
+        this.xdropData = data?.claims[this.userAccount];
     },
   },
 };
@@ -309,6 +334,30 @@ export default {
 <style scoped>
 .center-content {
   text-align: center;
+}
+
+.claimButton{
+    border: none;
+    background-color: #1E63DE;
+    margin-top: 2rem;
+    padding: 20px;
+    width: 100%;
+    color: #fff;
+    border-radius: 18px;
+}
+.gifImage {
+  width: 160px;
+  height: 160px;
+}
+.successImage {
+  width: 160px;
+  height: 160px;
+}
+
+.centerLoading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .airdrop h2 {
@@ -321,6 +370,18 @@ export default {
 .hide-modal {
   display: none;
 }
+.rowItem {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+    align-items: center;
+}
+.errorTextBlock {
+}
+.errorTextBlock a {
+  inline-size: 150px;
+  overflow-wrap: break-word;
+}
 .success {
   margin-bottom: 20px;
   color: #00a2ff;
@@ -328,6 +389,18 @@ export default {
 }
 .subscribe-box{
   margin-bottom: 80px;
+}
+.bodyBelow {
+    margin-top: 20px;
+}
+.buttonClose {
+  cursor: pointer;
+}
+.buttonCloseClaiming {
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+  align-items: flex-end;
 }
 
 @media (max-width: 768px) {
@@ -341,6 +414,9 @@ export default {
   }
   .subscribe-box{
   margin-bottom: 100px;
+}
+.errorTextBlock {
+  max-width: 300px;
 }
 }
 </style>
