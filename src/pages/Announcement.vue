@@ -36,33 +36,45 @@
           <div class="left-content">
             <div class="section-heading">
               <h5 class="subtitle">
-                1️⃣ We will change our project name into: Open World #openworld
+                1️⃣ Our project name changed from CryptoWar into OpenWorld
               </h5>
               <h6 class="text">- New website: http://openworld.vision</h6>
               <h6 class="text">
-                - Token will be changed from $xBlade into $OPEN
+                - Token ticker will be changed from $xBlade into $OPEN
+              </h6>
+              <h6 class="text">
+                - Smart contract address:
+                0x27a339d9b59b21390d7209b78a839868e319301b (same smart contract
+                address as of previous $xBlade)
               </h6>
               <hr />
               <h5>
-                #openworld will be our #Metaverse for people to play games,
-                build connections, make money & find happiness
+                OpenWorld will be our Metaverse for people to play games, build
+                connections, make money & find happiness
               </h5>
               <hr />
               <h5 class="subtitle">
-                2️⃣ Meanwhile, to play our games or buy our bonds
+                2️⃣ Meanwhile, to play our games or buy our bonds, please stay
+                with https://cryptowar.network
               </h5>
-              <h6 class="text">Please stay with https://cryptowar.network</h6>
-              <h6 class="text">We will keep you updated! 😄🙏</h6>
+
+              <h5 class="subtitle">3️⃣ For more details, please read</h5>
+              <h6 class="text">
+                - Substack:
+                https://openworldvision.medium.com/why-we-change-our-project-name-to-openworld-657494db0444
+              </h6>
+              <h6 class="text">
+                - Medium:
+                https://openworldvision.medium.com/why-we-change-our-project-name-to-openworld-657494db0444
+              </h6>
 
               <hr />
+              <h5>We will keep you updated! 😄🙏</h5>
               <h5>CryptoWar Team - soon to be OpenWorld Team 💜</h5>
             </div>
-
           </div>
         </div>
       </div>
     </div>
   </section>
-
-
 </template>
