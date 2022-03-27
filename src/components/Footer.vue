@@ -143,7 +143,7 @@
                 </a>
               </li>
               <li>
-                <a href="https://twitter.com/xbladecryptowar" target="_blank" rel="noopener noreferrer">
+                <a href="https://twitter.com/OpenWorldVision" target="_blank" rel="noopener noreferrer">
                   <i class="fab fa-twitter"></i>
                 </a>
               </li>
@@ -153,12 +153,12 @@
                 </a>
               </li>
               <li>
-                <a href="https://t.me/cryptowarxblade" target="_blank" rel="noopener noreferrer">
+                <a href="https://t.me/openworldglobal" target="_blank" rel="noopener noreferrer">
                   <i class="fab fa-telegram"></i>
                 </a>
               </li>
               <li>
-                <a href="https://medium.com/cryptowar-metaverse" target="_blank" rel="noopener noreferrer">
+                <a href="https://openworldvision.medium.com/" target="_blank" rel="noopener noreferrer">
                   <img loading="lazy"  src="https://i.imgur.com/bymeWZW.png" width="24px">
                 </a>
               </li>
@@ -178,7 +178,7 @@
                 </a>
               </li>
               <li>
-                <a href="https://cryptowar.substack.com/" target="_blank" rel="noopener noreferrer">
+                <a href="https://openworldvision.substack.com/" target="_blank" rel="noopener noreferrer">
                   <img loading="lazy"  src="https://i.imgur.com/V5uYHsX.png" width="24px">
                 </a>
               </li>
@@ -207,7 +207,7 @@
                 </a>
               </li>
               <li>
-                <a href="mailto:hi@cryptowar.network" target="_blank" rel="noopener noreferrer">
+                <a href="mailto:hi@openworld.vision" target="_blank" rel="noopener noreferrer">
                   Contact
                 </a>
               </li>

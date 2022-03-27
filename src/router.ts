@@ -41,6 +41,11 @@ const routes = [
     path: '/buy',
     name: 'buy-xblade',
     component: () => import("./pages/FairDistribution.vue")
+  },
+  {
+    path: '/announcement',
+    name: 'announcement',
+    component: () => import("./pages/Announcement.vue")
   }
 ];
 const router = createRouter({ history, routes });
