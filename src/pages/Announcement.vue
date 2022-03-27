@@ -49,8 +49,10 @@
               </h6>
               <hr />
               <h5>
-                OpenWorld will be our Metaverse for people to play games, build
-                connections, make money & find happiness
+                OpenWorld is a blockchain enabled open metaverse with a sound
+                circular economy based on real monetary flow. Our vision is to
+                open a new dimension for everyone to connect, play, express
+                themselves, and find happiness.
               </h5>
               <hr />
               <h5 class="subtitle">
