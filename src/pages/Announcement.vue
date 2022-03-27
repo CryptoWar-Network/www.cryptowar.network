@@ -38,14 +38,21 @@
               <h5 class="subtitle">
                 1️⃣ Our project name changed from CryptoWar into OpenWorld
               </h5>
-              <h6 class="text">- New website: http://openworld.vision</h6>
+              <h6 class="text">
+                - New website:
+                <a href="http://openworld.vision">http://openworld.vision</a>
+              </h6>
               <h6 class="text">
                 - Token ticker will be changed from $xBlade into $OPEN
               </h6>
               <h6 class="text">
                 - Smart contract address:
-                0x27a339d9b59b21390d7209b78a839868e319301b (same smart contract
-                address as of previous $xBlade)
+                <a
+                  href="https://bscscan.com/address/0x27a339d9b59b21390d7209b78a839868e319301b"
+                  target="_blank"
+                  >0x27a339d9b59b21390d7209b78a839868e319301b</a
+                >
+                (same smart contract address as of previous $xBlade)
               </h6>
               <hr />
               <h5>
@@ -57,17 +64,27 @@
               <hr />
               <h5 class="subtitle">
                 2️⃣ Meanwhile, to play our games or buy our bonds, please stay
-                with https://cryptowar.network
+                with
+                <a href="https://cryptowar.network"
+                  >https://cryptowar.network</a
+                >
               </h5>
 
               <h5 class="subtitle">3️⃣ For more details, please read</h5>
               <h6 class="text">
                 - Substack:
-                https://openworldvision.medium.com/why-we-change-our-project-name-to-openworld-657494db0444
+                <a
+                  href="https://openworldvision.substack.com/p/why-we-change-our-project-name-to?s=r"
+                  target="_blank"
+                  >https://openworldvision.substack.com/p/why-we-change-our-project-name-to?s=r</a
+                >
               </h6>
               <h6 class="text">
                 - Medium:
-                https://openworldvision.medium.com/why-we-change-our-project-name-to-openworld-657494db0444
+                <a
+                  href="https://openworldvision.medium.com/why-we-change-our-project-name-to-openworld-657494db0444"
+                  >https://openworldvision.medium.com/why-we-change-our-project-name-to-openworld-657494db0444</a
+                >
               </h6>
 
               <hr />
